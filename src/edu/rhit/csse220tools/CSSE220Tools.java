@@ -36,6 +36,12 @@ public class CSSE220Tools extends ViewPart {
         parent.setLayout(new FillLayout());
         try {
             browser = new Browser(parent, SWT.NONE);
+            // Check if it opened IE. If so, close it and force EDGE on Windows machines
+            if (browser.getBrowserType().equals("ie")) {
+            	browser.close();
+            	browser = new Browser(parent, SWT.EDGE);
+            }
+            
             browser.setUrl(HOMEPAGE);
         } catch (Exception e) {
             e.printStackTrace();
